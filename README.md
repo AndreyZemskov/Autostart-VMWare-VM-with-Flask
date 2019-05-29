@@ -25,7 +25,7 @@ Managment have next function:
   
   ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Managment.PNG?raw=true)
   
-Create One is created group to monitoring
+Create One is created group to monitoring\n
 On VM IP field should be specified IP VM which need monitoring
 On Host IP field should be specified ESX host IP where located virtual machine copy which monitoring
 ESX Version field should be choose ESXI host version (just now only 67)

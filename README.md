@@ -4,7 +4,7 @@ This application is listen IPs and will be check avalability servers and if serv
 
 Web application have two default accounts:
   - admin (have access to create and initialization VM on database. Defolt password admin)
-  - root (have access to administration panel and can create, delete and change values on DB and wab application. Defolt password admin)
+  - root (have access to administration panel and can create, delete and change values on DB and wab application. Defolt password root)
 
 Password can be changed on account menu.
 

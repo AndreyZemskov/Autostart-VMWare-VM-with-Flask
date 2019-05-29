@@ -26,7 +26,8 @@ Managment have next function:
   
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Managment.PNG?raw=true)
   
-**Create One** is created group to monitoring  
+Create One is created group to monitoring  
+___
 **VM IP** field should be specified IP VM which need monitoring  
 **Host IP** field should be specified ESX host IP where located virtual machine copy which monitoring  
 **ESX Version** field should be choose ESXI host version (just now only 67)  
@@ -36,3 +37,5 @@ Managment have next function:
 
 **Initialization**
 ___
+
+Initialization is function which collected information about VMs and reter OK if VM available (have ping) and Down if host not available (havn't ping)

@@ -13,7 +13,6 @@ Password can be changed on account menu.
 
 
 Dashboard on start page with function check available servers
-
 ___
 
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Dashbord.PNG?raw=true)
@@ -36,5 +35,4 @@ Managment have next function:
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Create_One.PNG?raw=true)
 
 **Initialization**
-
 ___

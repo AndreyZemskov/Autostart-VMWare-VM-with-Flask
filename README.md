@@ -25,11 +25,11 @@ Managment have next function:
   
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Managment.PNG?raw=true)
   
-Create One is created group to monitoring  
-On VM IP field should be specified IP VM which need monitoring  
-On Host IP field should be specified ESX host IP where located virtual machine copy which monitoring  
-ESX Version field should be choose ESXI host version (just now only 67)  
-VM ID is number of virtual machine wich can see after type command vim-cmd vmsvc/getallvms  
+**Create One** is created group to monitoring  
+**VM IP** field should be specified IP VM which need monitoring  
+**Host IP** field should be specified ESX host IP where located virtual machine copy which monitoring  
+**ESX Version** field should be choose ESXI host version (just now only 67)  
+**VM ID** is number of virtual machine wich can see after type command **vim-cmd vmsvc/getallvms**  
 
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Create_One.PNG?raw=true)
 

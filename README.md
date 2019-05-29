@@ -38,4 +38,9 @@ ___
 **Initialization**
 ___
 
-Initialization is function which collected information about VMs and reter OK if VM available (have ping) and Down if host not available (havn't ping)
+Initialization is function which collected information about VMs and reter OK if VM available (have ping) and Down if host not available (haven't ping)  
+
+**Listening Servers**
+___
+This function listen IPs and will be check availability if servers down then will be initialization respons to autostart copy VM on other host
+

@@ -23,7 +23,7 @@ Managment have next function:
   - Initialization
   - Listening Servers
   
-  ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Managment.PNG?raw=true)
+![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Managment.PNG?raw=true)
   
 Create One is created group to monitoring\n
 On VM IP field should be specified IP VM which need monitoring

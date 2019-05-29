@@ -1,6 +1,6 @@
 # Autostart VMWare Virtual Machines.
 
-This application is listen IPs and will be check avalability servers and if server down  then will be send command to start copy VM on other ESX host.
+This application is listening IPs and check avalability servers. If server is down will be sended a command to start copy VM on other ESX host.
 
 Web application have two default accounts:
   - admin (have access to create and initialization VM on database. Defolt password admin)
@@ -26,7 +26,7 @@ Managment have next function:
   
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Managment.PNG?raw=true)
   
-Create One is created group to monitoring  
+The function Create One is create group to monitoring  
 ___
 **VM IP** field should be specified IP VM which need monitoring  
 **Host IP** field should be specified ESX host IP where located virtual machine copy which monitoring  
@@ -38,9 +38,9 @@ ___
 **Initialization**
 ___
 
-Initialization is function which collected information about VMs and reter OK if VM available (have ping) and Down if host not available (haven't ping)  
+Initialization is function which collect information about VMs and reter OK if VM available (have ping) and Down if host not available (haven't ping)  
 
 **Listening Servers**
 ___
-This function listen IPs and will be check availability if servers down then after 15 seconds will be initialization respons to autostart copy VM on other host
+This function listen IPs and check availability if servers down. Then after 15 seconds initialization will be respons to autostart copy VM on other host
 

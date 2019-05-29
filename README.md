@@ -10,3 +10,8 @@ Password can be changed on account menu.
 
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Menu.PNG?raw=true)
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Account.PNG?raw=true)
+
+
+Dashboard on start page with function check available servers
+
+![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Dashbord.PNG?raw=true)

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="container" align="center">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" align="left">
+                            Dashboard
+                        </div>
+                                <div class="panel-body">
+                            <table class="table table-striped table-bordered table-list">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Virtual Machine
+                                        </th>
+                                        <th class="text-center">
+                                            Status
+                                        </th>
+                                        <th class="text-center">
+                                            Last Check
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="active">
+                                        {% for key, value in collection_info.items() %}
+                                            {% if value == 'Ok' %}
+                                                <tr class="success">
+                                                    <td align="center"> {{ key }} </td>
+                                                    <td align="center"> {{ value }} </td>
+                                                    <td align="center"> {{ last_check_time[0] }} </td>
+                                                </tr>
+                                            {% else %}
+                                                <tr class="danger">
+                                                    <td align="center"> {{ key }} </td>
+                                                    <td align="center"> {{ value }}</td>
+                                                    <td align="center">
+
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                </tbody>
+                            </table>
+                         <div>
+
+                                <div class="row">
+                                  <div class="col col-xs-10 pull-left" align="left">
+                                    <a href="{{ url_for('engines.view') }}"target="blank"><button type="button" class="btn btn-primary">Check</button></a>
+                                  </div>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

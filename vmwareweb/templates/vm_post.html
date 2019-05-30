@@ -1,0 +1,84 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <form class="form-horizontal" method="POST" role="form">
+          {{ form.hidden_tag() }}
+        <fieldset>
+          <legend>Address Details</legend>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">VM IP</label>
+            <div class="col-sm-8">
+                {{ form.vm_ip(class="form-control", placeholder='Virtual Machine IP')}}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">Host IP</label>
+            <div class="col-sm-8">
+              {{ form.hosts_ip(class="form-control", placeholder='Host IP')}}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">ESX Version</label>
+            <div class="col-sm-3">
+              {{ form.esx_version(class="form-control form-control-sm") }}
+            </div>
+
+            <label class="col-sm-2 control-label" for="textinput">VM ID</label>
+            <div class="col-sm-3">
+              {{ form.vm_clone(class="form-control", placeholder='VM ID') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+              <div class="pull-right">
+                {{ form.submit(class="btn btn-success") }}
+              </div>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+    <head>
+        <meta charset="UTF-8">
+        <title>VM Post</title>
+    </head>
+    <body>
+    <div>
+        <form class="form-group" method="POST", action="">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.hosts_ip.label }}<br>
+                {{ form.hosts_ip }}<br>
+                {{ form.esx_version.label }}<br>
+                {{ form.esx_version }}<br>
+                {{ form.vm_clone.label}}<br>
+                {{ form.vm_clone}}<br>
+            </div>
+
+            <div>
+                {{ form.submit(class="btn btn-success") }}
+            </div>
+        </form>
+    </div>
+
+    </body>

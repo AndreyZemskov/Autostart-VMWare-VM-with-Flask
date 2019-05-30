@@ -1,6 +1,6 @@
 # Autostart VMWare Virtual Machines.
 
-This application is listening IPs and check avalability servers. If server is down will be sended a command to start copy VM on other ESX host.
+This application is listening IPs and check avalability servers. If server is down will be sended a command to start copy VM on other ESX host. Before uses this application you should install libraries from requirements.txt just type pip install -r requirements.txt
 
 Web application have two default accounts:
   - admin (have access to create and initialization VM on database. Defolt password admin)
@@ -44,3 +44,14 @@ Initialization is function which collect information about VMs and reter OK if V
 ___
 This function listen IPs and check availability if servers down. Then after 45 seconds initialization will be respons to autostart copy VM on other host
 
+**SSH Conection**
+___
+
+For SSH connection with ESXI is use Paramico library, for setting connection you should written in **mp.yaml** file.  
+mp.yaml file have next parameters:  
+port: 22 (defolt)  
+user: 'user' (should be your user)  
+password 'password' (should be your password)  
+mp.yaml file located on **/vmwareweb/engines/mp.yaml**
+
+This project is in development, If you encounter errors please send me email.

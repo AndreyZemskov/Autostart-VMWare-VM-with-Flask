@@ -2,7 +2,7 @@
 
 This application is listening IPs and check avalability servers. If server is down will be sended a command to start copy VM on other ESX host.
 
-Start page
+**Start page**
 ___
 
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Nav_overview.png?raw=true)

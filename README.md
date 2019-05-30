@@ -1,6 +1,6 @@
 # Autostart VMWare Virtual Machines.
 
-This application is listening IPs and check avalability servers. If server is down will be sended a command to start copy VM on other ESX host. Before uses this application you should install libraries from requirements.txt just type pip install -r requirements.txt
+This application is listening IPs and check avalability servers. If server is down will be sended a command to start copy VM on other ESX host. Before use this application you should install libraries from requirements.txt just type pip install -r requirements.txt
 
 Web application have two default accounts:
   - admin (have access to create and initialization VM on database. Defolt password admin)

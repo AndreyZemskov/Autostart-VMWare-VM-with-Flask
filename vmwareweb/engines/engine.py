@@ -86,7 +86,7 @@ def monitoring():
             for vrt, host in host_vrt.items():
                 answer = subprocess.call(['ping', '-c', '3', vrt])
                 if answer == 1:
-                    time.sleep(5)
+                    time.sleep(15)
                     collection()
                     count += 1
                     if count >= 3:

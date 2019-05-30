@@ -1,0 +1,3 @@
+port: 22
+user: 'user'
+password: 'password'

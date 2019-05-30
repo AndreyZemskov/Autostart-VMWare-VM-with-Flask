@@ -2,6 +2,11 @@
 
 This application is listening IPs and check avalability servers. If server is down will be sended a command to start copy VM on other ESX host.
 
+Start page
+___
+
+![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Nav_overview.png?raw=true)
+
 Web application have two default accounts:
   - admin (have access to create and initialization VM on database. Defolt password admin)
   - root (have access to administration panel and can create, delete and change values on DB and wab application. Defolt password root)

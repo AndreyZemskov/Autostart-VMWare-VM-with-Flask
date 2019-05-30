@@ -42,5 +42,5 @@ Initialization is function which collect information about VMs and reter OK if V
 
 **Listening Servers**
 ___
-This function listen IPs and check availability if servers down. Then after 15 seconds initialization will be respons to autostart copy VM on other host
+This function listen IPs and check availability if servers down. Then after 45 seconds initialization will be respons to autostart copy VM on other host
 

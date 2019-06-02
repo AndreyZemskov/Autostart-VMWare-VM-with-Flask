@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash
 
 users = Blueprint('users', __name__)
 
-@users.route("/login", methods=["GET", "POST"])
+@users.route("/login", methods=["GET", "POST"], strict_slashes=False)
 def login():
     form = LoginForm()
     if form.validate_on_submit():

@@ -1,4 +1,4 @@
-from vmwareweb import mail, app
+from vmwareweb import mail, app, install_mail
 from flask_mail import Message
 from flask import Blueprint
 from vmwareweb.engines.response_collections import vrt_unreachable
@@ -17,6 +17,8 @@ def send_mail(subject, sender, recipients):
 
     msg = Message(subject, sender=sender, recipients=recipients)
     # msg.body = html_body
+    install_mail()
+    mail.init_app(app)
     mail.send(msg)
 
 

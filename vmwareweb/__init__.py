@@ -50,7 +50,6 @@ def install_mail():
     mail_username = (str(username[0]).replace("('", "").replace("',)", ""))
     mail_password = password[0]
 
-    protocol_view = protocol[0][0][5:]
     pas = mail_password[0]
     sd = str(decrypt('password', pas)).replace("b'", "").replace("'", "")
 

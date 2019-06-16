@@ -5,6 +5,8 @@ from vmwareweb import admin
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 from flask import abort
+from cryptography.fernet import Fernet
+from simplecrypt import encrypt
 
 
 @login_manager.user_loader
@@ -72,4 +74,48 @@ class ServerList(db.Model):
         return "{} {} {} {}".format(self.vm_ip, self.hosts_ip, self.esx_version, self.vm_clone)
 
 
+key = Fernet.generate_key()
+
+f = Fernet(key)
+
+
+class MailSettings(db.Model):
+
+    __tablename__ = 'email_settings'
+
+    id = db.Column(db.Integer, primary_key=True)
+    mail_server = db.Column(db.String(30), index=True)
+    username = db.Column(db.String(15), unique=True, index=True) # VM for listening
+    password = db.Column(db.String(200), index=True) # Hosts where is located cope VM
+    protocol = db.Column(db.String(15), index=True)
+    port = db.Column(db.SmallInteger, index=True)
+
+
+    def __init__(self, mail_server, username, password, protocol, port):
+        self.mail_server = mail_server
+        self.username = username
+        self.password = bytes(encrypt('password', password))
+        self.protocol = protocol
+        self.port = port
+
+    def __repr__(self):
+        return "{} {} {} {} {}".format(self.mail_server, self.username, self.password, self.protocol, self.port)
+
+
+class RecipientsPost(db.Model):
+
+    __tablename__ = 'recipients'
+
+    id = db.Column(db.Integer, primary_key=True)
+    recipients = db.Column(db.String(50), index=True)
+
+
+    def __init__(self, recipients):
+        self.recipients = recipients
+
+    def __repr__(self):
+        return "{}".format(self.recipients)
+
+
 admin.add_view(Controller(ServerList, db.session))
+admin.add_view(Controller(RecipientsPost, db.session))

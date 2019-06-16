@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            {% with test = get_flashed_messages(category_filter=["test"]) %}
+                {% if test %}
+                    <div class="alert alert-success" role="alert" align="center">
+                        {{ test[0] }}
+                    </div>
+                {% endif %}
+        {% endwith %}
+            <div class="panel panel-default panel-table">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <h3 class="panel-title">Mail Panel</h3>
+                  </div>
+                  <div class="col col-xs-6 text-right">
+                    <a href="{{ url_for('engines.mail_create') }}"target="blank"><button type="button" class="btn btn-primary">Add Mail Server</button></a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped table-bordered table-list" method="GET">
+                  <thead>
+                    <tr>
+                        <th class="text-center">Mail Server</em></th>
+                        <th class="text-center">Username</th>
+                        <th class="text-center">Use Protocol</th>
+                        <th class="text-center">Port</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  {% for key, value in mail_info.items() %}
+                            {% if value == 'Ok' %}
+                                <tr class="success">
+                                    <td align="center"> {{ mail_server }} </td>
+                                    <td align="center"> {{ mail_username }} </td>
+                                    <td align="center"> {{ protocol_view }} </td>
+                                    <td align="center"> {{ mail_port }} </td>
+                                </tr>
+                            {% endif %}
+
+                                {% if value == 'Down' %}
+                                <tr class="danger">
+                                    <td align="center"> {{ mail_server }} </td>
+                                    <td align="center"> {{ mail_username }} </td>
+                                    <td align="center"> {{ protocol_view }} </td>
+                                    <td align="center"> {{ mail_port }} </td>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+                  <div class="panel-footer">
+                    <div class="row">
+                      <div class="col col-xs-10 pull-left">
+
+                        <div class="btn-group btn pull-left">
+                            <div href="#" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false ">
+                                Mail Settings
+                                <span class="caret "></span></div>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url_for('engines.recipients_email') }}"><span class=""></span> Add Recipients</a></li>
+                                    <li><a href="{{ url_for('engines.check_mail') }}"><span class=""></span> Check Mail Server</a></li>
+                                    <li><a href="{{ url_for('engines.test_mail') }}"><span class=""></span> Send Test Mail</a></li>
+                                    <li class="divider"></li>
+                                </ul>
+                            </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div></div></div>
+
+{% endblock content %}

@@ -11,31 +11,38 @@
       <form class="form-horizontal" method="POST" role="form">
           {{ form.hidden_tag() }}
         <fieldset>
-          <legend>Address Details</legend>
+          <legend>Mail Settings</legend>
 
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">VM IP</label>
+            <label class="col-sm-2 control-label" for="textinput">Mail Server</label>
             <div class="col-sm-8">
-                {{ form.vm_ip(class="form-control", placeholder='Virtual Machine IP')}}
+                {{ form.mail_server(class="form-control", placeholder='Mail Server')}}
             </div>
           </div>
 
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">Host IP</label>
+            <label class="col-sm-2 control-label" for="textinput">Username</label>
             <div class="col-sm-8">
-              {{ form.hosts_ip(class="form-control", placeholder='Host IP')}}
+              {{ form.username(class="form-control", placeholder='Sender')}}
             </div>
           </div>
 
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">ESX Version</label>
+            <label class="col-sm-2 control-label" for="textinput">Password</label>
+            <div class="col-sm-8">
+              {{ form.password(class="form-control form-control-sm", placeholder='Sender Password') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">Protocol</label>
             <div class="col-sm-3">
-              {{ form.esx_version(class="form-control form-control-sm") }}
+              {{ form.protocol(class="form-control", placeholder='Protocol') }}
             </div>
 
-            <label class="col-sm-2 control-label" for="textinput">VM ID</label>
+            <label class="col-sm-2 control-label" for="textinput">Port</label>
             <div class="col-sm-3">
-              {{ form.vm_clone(class="form-control", placeholder='VM ID') }}
+              {{ form.port(class="form-control form-control-sm", placeholder='Port') }}
             </div>
           </div>
 
@@ -46,7 +53,7 @@
               </div>
             </div>
           </div>
-
+          </div>
         </fieldset>
       </form>
     </div>

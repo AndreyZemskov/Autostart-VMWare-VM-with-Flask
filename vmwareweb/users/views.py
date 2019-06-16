@@ -4,7 +4,7 @@ from flask import render_template, url_for, flash, redirect, Blueprint
 from flask_login import login_user, logout_user, login_required, current_user
 from vmwareweb import db
 from vmwareweb.models import User
-from vmwareweb.users.forms import LoginForm, ChangePasswordForm
+from vmwareweb.users.forms import LoginForm, ChangePasswordForm, RegistrationForm
 from werkzeug.security import generate_password_hash
 
 users = Blueprint('users', __name__)
@@ -45,6 +45,23 @@ def account():
         else:
             flash('Invalid password.')
     return render_template("account.html", form=form)
+
+
+@users.route("/register", methods=["GET", "POST"], strict_slashes=False)
+def register():
+    form = RegistrationForm()
+
+    if form.validate_on_submit():
+        user = User(email=form.email.data,
+                    username=form.username.data,
+                    password=form.password.data)
+
+        db.session.add(user)
+        db.session.commit()
+        flash("Thanks for registration!")
+        return redirect(url_for('users.login'))
+
+    return render_template("register.html", form=form)
 
 @users.route("/admin", methods=['GET', 'POST'])
 @login_required

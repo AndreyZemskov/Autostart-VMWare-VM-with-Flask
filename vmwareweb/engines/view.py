@@ -2,9 +2,13 @@
 
 from flask import render_template, redirect, url_for, flash, Blueprint
 from flask_login import login_required
-from vmwareweb.engines.engine import collection_info, collection_start, monitoring_start, last_check_time
-from vmwareweb.models import ServerList, db
-from vmwareweb.engines.forms import ServerPost
+from vmwareweb.engines.engine_threading import collection_start, monitoring_start, mail_start
+from vmwareweb.engines.response_collections import collection_info, last_check_time
+from vmwareweb.models import db, ServerList, MailSettings, RecipientsPost
+from vmwareweb.engines.forms import ServerPost, EmailPost, RecipientsForm
+from vmwareweb.engines.send_email import mail_test
+from vmwareweb.engines.response_collections import mail_info
+
 
 engines_blueprints = Blueprint('engines', __name__)
 
@@ -25,17 +29,88 @@ def create_vm():
 def index():
     return render_template('index.html', collection_info=collection_info, last_check_time=last_check_time)
 
+
 @engines_blueprints.route('/collection')
 def view():
     collection_start()
     return redirect(url_for('engines.control_panel'))
+
 
 @engines_blueprints.route('/monitoring_start')
 def monitoring():
     monitoring_start()
     return redirect(url_for('engines.control_panel'))
 
+
 @engines_blueprints.route('/control_panel')
 @login_required
 def control_panel():
     return render_template('control_panel.html', collection_info=collection_info, last_check_time=last_check_time)
+
+
+def prepare_mail():
+    MailSettings.query.filter_by(id=1).delete()
+    db.session.commit()
+    return 0
+
+@engines_blueprints.route('/mail_post', methods=['GET', 'POST'])
+def mail_create():
+
+
+
+    form = EmailPost()
+    if form.validate_on_submit():
+        prepare_mail()
+        mail_post = MailSettings(mail_server=form.mail_server.data, username=form.username.data, password=form.password.data, protocol=form.protocol.data, port=form.port.data)
+        db.session.add(mail_post)
+        db.session.commit()
+
+        return redirect(url_for('engines.control_panel'))
+
+    return render_template('mail_post.html', form=form)
+
+
+@engines_blueprints.route('/mail_panel', methods=['GET', 'POST'])
+def mail_view():
+
+    mail = db.session.query(MailSettings.mail_server)
+    mail_server = (str(mail[0]).replace("('", "").replace("',)", ""))
+
+    username = db.session.query(MailSettings.username)
+    mail_username = (str(username[0]).replace("('", "").replace("',)", ""))
+
+    protocol = db.session.query(MailSettings.protocol)
+    mail_ssl = (str(protocol[0]).replace("('", "").replace("',)", ""))
+    protocol_view = mail_ssl[5:]
+
+    port = db.session.query(MailSettings.port)
+    mail_port = int(str(port[0]).replace("(", "").replace(",)", ""))
+
+    return render_template('mail_panel.html', mail_server=mail_server, mail_username=mail_username, protocol_view=protocol_view, mail_port=mail_port, mail_info=mail_info)
+
+
+@engines_blueprints.route('/recipients_post_mail', methods=['GET', 'POST'])
+def recipients_email():
+
+    form = RecipientsForm()
+    if form.validate_on_submit():
+        recipients_post = RecipientsPost(recipients=form.recipients.data)
+        db.session.add(recipients_post)
+        db.session.commit()
+        flash('Recipient was added.', 'success')
+        return redirect(url_for('engines.recipients_email'))
+
+    return render_template('recipients.html', form=form)
+
+
+@engines_blueprints.route('/send_test_mail')
+def test_mail():
+    mail_test()
+    flash('Message was sended', 'test')
+    return redirect(url_for('engines.mail_view'))
+
+
+@engines_blueprints.route('/check_mail_srv')
+def check_mail():
+    mail_start()
+    return redirect(url_for('engines.mail_view'))

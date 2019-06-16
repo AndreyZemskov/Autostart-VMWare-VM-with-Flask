@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <form class="form-horizontal" method="POST" role="form">
+          {{ form.hidden_tag() }}
+                {% with success = get_flashed_messages(category_filter=["success"]) %}
+            {% if success %}
+                <div class="alert alert-success" role="alert" align="center">
+                    {{ success[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <fieldset>
+          <legend>Add Recipient</legend>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">Recipients</label>
+            <div class="col-sm-8">
+                {{ form.recipients(class="form-control", placeholder='Sender')}}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+              <div class="pull-right">
+                {{ form.submit(class="btn btn-success") }}
+              </div>
+            </div>
+          </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+</div>
+
+{% endblock content %}

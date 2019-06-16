@@ -53,7 +53,7 @@ h1.page-header {
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href=""><span class="glyphicon glyphicon-user"></span> Logged as {{current_user.username }}</a></li>
-							<li><a href="{{ url_for('users.account') }}"><span class="glyphicon glyphicon-cog"></span> Change Password</a></li>
+							<li><a href="{{ url_for('users.account') }}"><span class="glyphicon glyphicon-pencil"></span> Change Password</a></li>
 							<li class="divider"></li>
 							<li><a href="{{ url_for('users.logout') }}"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
 						</ul>
@@ -61,7 +61,6 @@ h1.page-header {
 					<ul class="nav navbar-nav">
 						<li><a href="{{ url_for('users.login') }}"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
 					</ul>
-
 				{% endif %}
 					</li>
 				</ul>
@@ -73,8 +72,8 @@ h1.page-header {
 		<div class="col-md-2 sidebar">
 			<ul class="nav nav-pills nav-stacked">
 				<li class="active"><a href="{{ url_for('engines.index') }}">Home</a></li>
-				<li><a href="{{ url_for('engines.control_panel') }}"><span class="glyphicon glyphicon-wrench"></span> Management</a></li>
-
+				<li><a href="{{ url_for('engines.control_panel') }}"><span class="glyphicon glyphicon-cog"></span> Virtual Machines Management</a></li>
+				<li><a href="{{ url_for('engines.mail_view') }}"><span class="glyphicon glyphicon-envelope"></span> Settings Mail</a></li>
 			</ul>
 		{% endif %}
 		</div>

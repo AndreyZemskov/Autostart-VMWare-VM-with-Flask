@@ -33,13 +33,34 @@ login_manager.login_view = 'users.login'
 
 """ EMAIL SETUP """
 
-from vmwareweb.settings_email import mail_server, mail_username, mail_port, mail_ssl, sd
+from vmwareweb.models import MailSettings, db
+from simplecrypt import decrypt
 
-app.config['MAIL_SERVER'] = mail_server
-app.config['MAIL_PORT'] = mail_port
-app.config['MAIL_USE_SSL'] = mail_ssl
-app.config['MAIL_USERNAME'] = mail_username
-app.config['MAIL_PASSWORD'] = sd
+
+def install_mail():
+    mail = db.session.query(MailSettings.mail_server)
+    username = db.session.query(MailSettings.username)
+    password = db.session.query(MailSettings.password)
+    protocol = db.session.query(MailSettings.protocol)
+    port = db.session.query(MailSettings.port)
+
+    mail_server = (str(mail[0]).replace("('", "").replace("',)", ""))
+    mail_port = int(str(port[0]).replace("(", "").replace(",)", ""))
+    mail_ssl = bool(str(protocol[0]).replace("('", "").replace("',)", ""))
+    mail_username = (str(username[0]).replace("('", "").replace("',)", ""))
+    mail_password = password[0]
+
+    protocol_view = protocol[0][0][5:]
+    pas = mail_password[0]
+    sd = str(decrypt('password', pas)).replace("b'", "").replace("'", "")
+
+    app.config['MAIL_SERVER'] = mail_server
+    app.config['MAIL_PORT'] = mail_port
+    app.config['MAIL_USE_SSL'] = mail_ssl
+    app.config['MAIL_USERNAME'] = mail_username
+    app.config['MAIL_PASSWORD'] = sd
+
+install_mail()
 mail = Mail(app)
 
 

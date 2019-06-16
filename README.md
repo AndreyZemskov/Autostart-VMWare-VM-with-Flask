@@ -20,9 +20,9 @@ ___
 
 Managment have next function:
 
-  - Create One
-  - Initialization
-  - Listening Servers
+  - Create One;
+  - Initialization;
+  - Listening Servers;
   
 ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Managment.PNG?raw=true)
   
@@ -38,11 +38,11 @@ ___
 **Initialization**
 ___
 
-Initialization is function which collect information about VMs and reter OK if VM available (have ping) and Down if host not available (haven't ping)  
+Initialization is function which collect information about VMs and reter OK if VM available (have ping) and Down if host not available (haven't ping).
 
 **Listening Servers**
 ___
-This function listen IPs and check availability if servers down. Then after 45 seconds initialization will be respons to autostart copy VM on other host
+This function listen IPs and check availability if servers down. Then after 45 seconds initialization will be respons to autostart copy VM on other host.
 
 **SSH Conection**
 ___
@@ -53,5 +53,34 @@ port: 22 (defolt)
 user: 'user' (should be your user)  
 password 'password' (should be your password)  
 mp.yaml file located on **/vmwareweb/engines/mp.yaml**
+
+**Update**
+___
+
+Now this application has an ability to send an email and has next function:
+
+  - Mail server settings;
+  - Add recipient;
+  - Check mail server (avalible or not);
+  - Sends test email;
+  
+ ![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Mail_Panel.PNG?raw=true)
+ 
+ Mail server settings:
+ ___
+ 
+If you want to send an email you should specify mail server which will send email, for example smtp.gmail.com. Username its a name of a person who sends an email, for example example@gmail.com. Password field is for username password. You can choose one of two protocols (TLS/SSL) and specify the number of port.
+
+![alt text](https://github.com/AndreyZemskov/Autostart-VMWare-VM-with-Flask/blob/master/screens/Mail_Settings.PNG?raw=true)
+ 
+You can add recipient who will get message.
+ 
+After email server settings you can check server availability - press Check mail server. If you need to check that your email sended use the function Sends test email.
+
+There are 3 varietys:
+
+  - alert() if one VM stops answer for ping;
+  - successful_autostart() send message when one of copy VM will be start on other ESX Host;
+  - bad_autostart() if VM cant autostart;
 
 This project is in development, If you encounter errors please send me email.

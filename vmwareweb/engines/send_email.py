@@ -4,6 +4,7 @@ from flask import Blueprint
 from vmwareweb.engines.response_collections import vrt_unreachable
 from vmwareweb.models import RecipientsPost, db
 from vmwareweb.settings_email import mail_server
+import smtplib
 
 send_email_blueprints = Blueprint('send_email', __name__)
 
@@ -17,9 +18,13 @@ def send_mail(subject, sender, recipients):
 
     msg = Message(subject, sender=sender, recipients=recipients)
     # msg.body = html_body
-    install_mail()
-    mail.init_app(app)
-    mail.send(msg)
+    try:
+        install_mail()
+        mail.init_app(app)
+        mail.send(msg)
+
+    except smtplib.SMTPRecipientsRefused:
+        print('smtplib.SMTPRecipientsRefused')
 
 
 def alert():

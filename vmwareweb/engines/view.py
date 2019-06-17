@@ -81,10 +81,11 @@ def mail_view():
 
         mail_server = re.search(r"[a-zA-Z]", str(email)).string
         mail_username = re.search(r"[a-zA-Z]", str(usr)).string
-        protocol_view = re.search(r"[a-zA-Z]", str(proto)).string
+        protocol_search = re.search(r"[a-zA-Z]", str(proto)).string
+        protocol_view = protocol_search[5:]
         port_str = str(ports)
         mail_find = re.findall(r"^\d{1,3}", port_str)
-        mail_port = mail_find[5:]
+        mail_port = mail_find[0]
 
 
     return render_template('mail_panel.html', mail_server=mail_server, mail_username=mail_username, protocol_view=protocol_view, mail_port=mail_port, mail_info=mail_info)

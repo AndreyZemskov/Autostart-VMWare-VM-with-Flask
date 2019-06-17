@@ -1,5 +1,6 @@
 """ engines/view """
 
+import re
 from flask import render_template, redirect, url_for, flash, Blueprint
 from flask_login import login_required
 from vmwareweb.engines.engine_threading import collection_start, monitoring_start, mail_start
@@ -75,19 +76,16 @@ def mail_create():
 
 @engines_blueprints.route('/mail_panel', methods=['GET', 'POST'])
 def mail_view():
+    for email, usr, proto, ports in db.session.query(MailSettings.mail_server, MailSettings.username,
+                                                     MailSettings.protocol, MailSettings.port):
 
-    mail = db.session.query(MailSettings.mail_server)
-    mail_server = (str(mail[0]).replace("('", "").replace("',)", ""))
+        mail_server = re.search(r"[a-zA-Z]", str(email)).string
+        mail_username = re.search(r"[a-zA-Z]", str(usr)).string
+        protocol_view = re.search(r"[a-zA-Z]", str(proto)).string
+        port_str = str(ports)
+        mail_find = re.findall(r"^\d{1,3}", port_str)
+        mail_port = mail_find[0]
 
-    username = db.session.query(MailSettings.username)
-    mail_username = (str(username[0]).replace("('", "").replace("',)", ""))
-
-    protocol = db.session.query(MailSettings.protocol)
-    mail_ssl = (str(protocol[0]).replace("('", "").replace("',)", ""))
-    protocol_view = mail_ssl[5:]
-
-    port = db.session.query(MailSettings.port)
-    mail_port = int(str(port[0]).replace("(", "").replace(",)", ""))
 
     return render_template('mail_panel.html', mail_server=mail_server, mail_username=mail_username, protocol_view=protocol_view, mail_port=mail_port, mail_info=mail_info)
 

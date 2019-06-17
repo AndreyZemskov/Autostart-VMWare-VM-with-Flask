@@ -37,7 +37,7 @@ from vmwareweb.models import MailSettings, db
 from simplecrypt import decrypt
 
 
-def install_mail():
+def dinamic_mail_setting():
     mail = db.session.query(MailSettings.mail_server)
     username = db.session.query(MailSettings.username)
     password = db.session.query(MailSettings.password)
@@ -59,7 +59,7 @@ def install_mail():
     app.config['MAIL_USERNAME'] = mail_username
     app.config['MAIL_PASSWORD'] = sd
 
-install_mail()
+dinamic_mail_setting()
 mail = Mail(app)
 
 

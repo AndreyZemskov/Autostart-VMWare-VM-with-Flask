@@ -8,7 +8,7 @@ from vmwareweb.models import db, ServerList, MailSettings, RecipientsPost
 from vmwareweb.engines.forms import ServerPost, EmailPost, RecipientsForm
 from vmwareweb.engines.send_email import mail_test
 from vmwareweb.engines.response_collections import mail_info
-from vmwareweb import install_mail, mail, app
+from vmwareweb import dinamic_mail_setting, mail, app
 
 
 engines_blueprints = Blueprint('engines', __name__)
@@ -65,7 +65,7 @@ def mail_create():
         mail_post = MailSettings(mail_server=form.mail_server.data, username=form.username.data, password=form.password.data, protocol=form.protocol.data, port=form.port.data)
         db.session.add(mail_post)
         db.session.commit()
-        install_mail()
+        dinamic_mail_setting()
         mail.init_app(app)
 
         return redirect(url_for('engines.mail_view'))

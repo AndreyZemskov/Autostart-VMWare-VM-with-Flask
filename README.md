@@ -82,5 +82,10 @@ There are 3 varietys:
   - alert() if one VM stops answer for ping;
   - successful_autostart() send message when one of copy VM will be start on other ESX Host;
   - bad_autostart() if VM cant autostart;
+  
+  **Logging**
+___
+
+Application has Logging function. File with entries will be create after application start. You can find file on root folder it named **application.log**
 
 This project is in development, If you encounter errors please send me email.

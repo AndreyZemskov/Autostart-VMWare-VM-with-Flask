@@ -5,6 +5,7 @@ from flask import Blueprint
 from vmwareweb.engines.response_collections import vrt_unreachable
 from vmwareweb.models import RecipientsPost, db
 from vmwareweb.models import MailSettings
+from flask import flash
 import smtplib
 
 send_email_blueprints = Blueprint('send_email', __name__)
@@ -95,11 +96,6 @@ def bad_autostart():
 
 
 def mail_test():
-
-    """
-        This function will be send just test message
-    """
-
     with app.app_context():
         recipients_list = []
         mail = db.session.query(MailSettings.mail_server)
@@ -109,5 +105,13 @@ def mail_test():
             recipients_search = re.search(r"[a-zA-Z]", str(recipient[0]))
             recipients_list.append(recipients_search.string)
 
-            for rec in recipients_list:
+        if not recipients_list:
+            flash('Not recipient', 'not_recipient')
+
+        for rec in recipients_list:
+            if not re.match(r"[^@]+@[^@]+\.[^@]+", rec):
+                flash('Not recipient or bad email address', 'not_recipient')
+
+            else:
+                flash('Message was sended', 'test')
                 send_mail('Mail Test is Pass', '{}'.format(mail_server), ['{}'.format(rec)])

@@ -108,7 +108,6 @@ def recipients_email():
 @engines_blueprints.route('/send_test_mail')
 def test_mail():
     mail_test()
-    flash('Message was sended', 'test')
     return redirect(url_for('engines.mail_view'))
 
 

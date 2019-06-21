@@ -46,7 +46,6 @@
                   </thead>
                   <tbody>
 
-
                   {% for key, value in mail_info.items() %}
                             {% if value == 'Ok' %}
                                 <tr class="success">
@@ -65,11 +64,8 @@
                                     <td align="center"> {{ mail_port }} </td>
                                     </td>
                                 </tr>
-
-
                             {% endif %}
                         {% endfor %}
-
                   </tbody>
                 </table>
               </div>
@@ -82,11 +78,9 @@
                                 Mail Settings
                                 <span class="caret "></span></div>
                                 <ul class="dropdown-menu" role="menu">
-
-                                    <li><a href="{{ url_for('engines.sender_email') }}"><span class="glyphicon glyphicon-user"></span> Add Sender</a></li>
-                                    <li><a href="{{ url_for('engines.recipients_email') }}"><span class="glyphicon glyphicon-eye-open"></span> Add Recipients</a></li>
-                                    <li><a href="{{ url_for('engines.check_mail') }}"><span class="glyphicon glyphicon-check"></span> Check Mail Server</a></li>
-                                    <li><a href="{{ url_for('engines.test_mail') }}"><span class="glyphicon glyphicon-send"></span> Send Test Mail</a></li>
+                                    <li><a href="{{ url_for('engines.recipients_email') }}"><span class=""></span> Add Recipients</a></li>
+                                    <li><a href="{{ url_for('engines.check_mail') }}"><span class=""></span> Check Mail Server</a></li>
+                                    <li><a href="{{ url_for('engines.test_mail') }}"><span class=""></span> Send Test Mail</a></li>
                                     <li class="divider"></li>
                                 </ul>
                             </div>

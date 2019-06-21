@@ -6,7 +6,9 @@ from vmwareweb.engines.response_collections import vrt_unreachable
 from vmwareweb.models import RecipientsPost, db
 from vmwareweb.models import MailSettings
 from flask import flash
+import time
 import smtplib
+import logging
 
 send_email_blueprints = Blueprint('send_email', __name__)
 
@@ -27,6 +29,7 @@ def send_mail(subject, sender, recipients):
 
     except smtplib.SMTPRecipientsRefused:
         print('smtplib.SMTPRecipientsRefused')
+        logging.info("!!! Connection Refused !!!{}".format(time.strftime("%d.%m.%y %H:%M")))
 
 
 def alert():
@@ -48,8 +51,9 @@ def alert():
 
         for unreachable in vrt_unreachable:
             for rec in recipients_list:
-                send_mail(' !!! ALERT !!! VM {} is down'.format(unreachable), '{}'.format(mail_server),
+                send_mail(' !!! ALERT !!! VM {} is unreachable'.format(unreachable), '{}'.format(mail_server),
                           ['{}'.format(rec)])
+                logging.info("!!! Alert VM is unreachable {} !!!".format(time.strftime("%d.%m.%y %H:%M")))
 
 
 def successful_autostart():
@@ -72,6 +76,7 @@ def successful_autostart():
             for rec in recipients_list:
                 send_mail(' !! Successful Autostar !! {} is autostart'.format(unreachable), '{}'.format(mail_server),
                           ['{}'.format(rec)])
+                logging.info("!!! Successful Autostart !!! {}".format(time.strftime("%d.%m.%y %H:%M")))
 
 
 def bad_autostart():
@@ -93,6 +98,7 @@ def bad_autostart():
             for rec in recipients_list:
                 send_mail('!!! Bad Connection !!! VM {} cant autostart due to connection error'.format(unreachable),
                           '{}'.format(mail_server), ['{}'.format(rec)])
+                logging.info("!!! Bad Autostart !!! {}".format(time.strftime("%d.%m.%y %H:%M")))
 
 
 def mail_test():
@@ -107,11 +113,14 @@ def mail_test():
 
         if not recipients_list:
             flash('Not recipient', 'not_recipient')
+            logging.info("!!! Send Message When Havent Recipients {} !!!".format(time.strftime("%d.%m.%y %H:%M")))
 
         for rec in recipients_list:
             if not re.match(r"[^@]+@[^@]+\.[^@]+", rec):
                 flash('Not recipient or bad email address', 'not_recipient')
+                logging.info("!!! Bad Address {} !!!".format(time.strftime("%d.%m.%y %H:%M")))
 
             else:
                 flash('Message was sended', 'test')
                 send_mail('Mail Test is Pass', '{}'.format(mail_server), ['{}'.format(rec)])
+                logging.info("!!! Test Message Send {} !!!".format(time.strftime("%d.%m.%y %H:%M")))

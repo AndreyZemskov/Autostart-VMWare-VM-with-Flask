@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_admin import Admin
+import logging
 
 
 app = Flask(__name__)
@@ -61,6 +62,11 @@ def dinamic_mail_setting():
 
 dinamic_mail_setting()
 mail = Mail(app)
+
+
+""" LOGGER SETUP """
+
+logging.basicConfig(filename="application.log", level=logging.INFO)
 
 
 """ BLUEPRINTS SETUP """

@@ -9,6 +9,7 @@ from vmwareweb.engines.send_email import alert, successful_autostart, bad_autost
 import paramiko
 import time
 import yaml
+import logging
 
 
 yaml_dir = os.path.abspath(os.path.dirname(__file__))
@@ -30,6 +31,9 @@ def monitoring():
         will be initialization response to auto start copy VM on other host and will be call SSH Client function
 
     """
+
+    logging.info("!!! Engine start !!! {}".format(time.strftime("%d.%m.%y %H:%M")))
+
     try_connect = 0
     initialization()
     while True:
@@ -40,6 +44,7 @@ def monitoring():
                     collection()
                     time.sleep(15)
                     try_connect += 1
+                    logging.info("!!! Try firs reconnection {} !!!".format(time.strftime("%d.%m.%y %H:%M")))
                     if try_connect == 2:
                         vrt_unreachable.append(vrt)
                         with app.app_context():
@@ -57,6 +62,7 @@ def monitoring():
 
         except TimeoutError:
             print('Connection timed out')
+            logging.info("SSH Connection time out {}".format(time.strftime("%d.%m.%y %H:%M")))
 
         except paramiko.ssh_exception.NoValidConnectionsError:
             print('NoValidConnectionsError')
